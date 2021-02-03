@@ -6,7 +6,7 @@ import importlib
 import torch
 
 from runx.logx import logx
-from ..config import cfg
+from semantic_segmentation.config import cfg
 
 
 def get_net(args, criterion):
@@ -49,7 +49,7 @@ def get_model(network, num_classes, criterion):
     """
     Fetch Network Function Pointer
     """
-    module = network[: network.rfind(".")]
+    module = "semantic_segmentation." + network[: network.rfind(".")]
     model = network[network.rfind(".") + 1 :]
     mod = importlib.import_module(module)
     net_func = getattr(mod, model)
